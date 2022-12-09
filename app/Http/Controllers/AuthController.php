@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+
+use App\Models\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,8 +15,9 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:players',
             'password' => 'required|string|min:6',
+            'steamUsername' => 'required|string|max:255'
         ]);
 
         if ($validator->fails()) {
@@ -25,10 +27,11 @@ class AuthController extends Controller
             ], 400);
         }
 
-        $user = User::create([
+        $user = Player::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'steamUsername' => $request->get('steamUsername')
         ]);
 
         $token = JWTAuth::fromUser($user);

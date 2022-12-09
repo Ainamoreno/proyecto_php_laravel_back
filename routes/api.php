@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PlayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/creategameplay/{id}', [PlayController::class, 'createGamePlay']);
+Route::get('/gameplay/{id}', [PlayController::class, 'getGamePlays']);
+
 
 Route::group([
     'middleware' => 'jwt.auth'
