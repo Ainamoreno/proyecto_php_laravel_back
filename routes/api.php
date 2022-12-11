@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PartyController;
 use App\Http\Controllers\PlayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +25,18 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+//Play
 Route::post('/creategameplay/{id}', [PlayController::class, 'createGamePlay']);
 Route::get('/gameplay/{id}', [PlayController::class, 'getGamePlays']);
+
+//Party
+Route::post('/getinparty', [PartyController::class, 'getInParty']);
+Route::post('/getoutparty', [PartyController::class, 'getOutParty']);
+
+//Message
+Route::post('/message', [MessageController::class, 'postMessage']);
+Route::put('/message/{id}', [MessageController::class, 'updateMessage']);
+Route::delete('/message/{id}', [MessageController::class, 'deleteMessage']);
 
 
 Route::group([

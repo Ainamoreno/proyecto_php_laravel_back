@@ -16,7 +16,6 @@ class PlayController extends Controller
             $gameId = $id;
             $playerId = $request->input('player_id');
 
-
             $newGamePlay = new Play();
             $newGamePlay->game_id = $gameId;
             $newGamePlay->player_id = $playerId;
