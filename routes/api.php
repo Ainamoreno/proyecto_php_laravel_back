@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PartyController;
 use App\Http\Controllers\PlayController;
+use App\Http\Controllers\PlayerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,8 @@ Route::post('/message', [MessageController::class, 'postMessage']);
 Route::put('/message/{id}', [MessageController::class, 'updateMessage']);
 Route::delete('/message/{id}', [MessageController::class, 'deleteMessage']);
 
+//Player
+Route::put('/player/{id}', [PlayerController::class, 'updatePlayer']);
 
 Route::group([
     'middleware' => 'jwt.auth'
