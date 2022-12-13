@@ -31,7 +31,7 @@ Route::post('/creategameplay/{id}', [PlayController::class, 'createGamePlay']);
 Route::get('/gameplay/{id}', [PlayController::class, 'getGamePlays']);
 
 //Party
-Route::post('/getinparty', [PartyController::class, 'getInParty']);
+Route::post('/getinparty/{id}', [PartyController::class, 'getInParty']);
 Route::post('/getoutparty', [PartyController::class, 'getOutParty']);
 
 //Message

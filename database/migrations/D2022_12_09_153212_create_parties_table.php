@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('play_id')->constrained('plays');
             $table->string('name');
+            $table->boolean('is_inside');
             $table->timestamps();
         });
     }

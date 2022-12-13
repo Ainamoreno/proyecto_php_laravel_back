@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('party_player', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('player_id')->constrained('users');
+            $table->foreignId('player_id')->constrained('players');
             $table->foreignId('party_id')->constrained('parties');
         });
     }

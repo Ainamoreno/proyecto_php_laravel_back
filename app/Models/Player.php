@@ -57,4 +57,9 @@ class Player extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function parties()
+    {
+        return $this->belongsToMany(Party::class);
+    }
 }

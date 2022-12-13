@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class MessageController extends Controller
 {
-    public function postMessage(Request $request, $id)
+    public function postMessage(Request $request)
     {
         try {
 
-            $party_id = $id;
+            $party_id = $request->input('party_id');
             $message = $request->input('message');
 
             $newMessage = new Message();
@@ -28,7 +28,6 @@ class MessageController extends Controller
                 'message' => 'Mensaje enviado correctamente.',
                 'text' => $message
             ], 200);
-            
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return response([
