@@ -102,4 +102,24 @@ class MessageController extends Controller
             ], 500);
         }
     }
+
+    public function getMessages($id)
+    {
+        try {
+            $messages = Message::query()
+            ->where('party_id', $id)
+            ->get();
+            return response([
+                'success' => true,
+                'message' => 'Mensajes mostrados correctamente.',
+                'data' => $messages
+            ], 200);
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return response([
+                'success' => false,
+                'message' => 'Error al mostrar los mensajes.'
+            ], 500);
+        }
+    }
 }

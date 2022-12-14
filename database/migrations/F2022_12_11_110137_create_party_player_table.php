@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('party_player', function (Blueprint $table) {
+        Schema::create('party_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('player_id')->constrained('players');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('party_id')->constrained('parties');
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('party_player');
+        Schema::dropIfExists('party_user');
     }
 };

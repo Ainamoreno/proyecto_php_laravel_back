@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Player;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
-class PlayerController extends Controller
+class UserController extends Controller
 {
-    public function updatePlayer(Request $request, $id)
+    public function updateUser(Request $request)
     {
         try {
-            $playerId = $id;
+            $userId = auth()->user()->id;
+
             $validator = Validator::make($request->all(), [
                 'name' => 'required|max:255',
                 'steamUsername' => 'required|max:255'
@@ -25,18 +26,18 @@ class PlayerController extends Controller
                 ], 400);
             }
 
-            $player = Player::find($playerId);
-            $player->name = $request->input('name');
-            $player->steamUsername = $request->input('steamUsername');
+            $user = User::find($userId);
+            $user->name = $request->input('name');
+            $user->steamUsername = $request->input('steamUsername');
 
-            if (isset($player)) {
-                $player->name = $request->input('name');
+            if (isset($user)) {
+                $user->name = $request->input('name');
             }
-            if (isset($player)) {
-                $player->steamUsername = $request->input('steamUsername');
+            if (isset($user)) {
+                $user->steamUsername = $request->input('steamUsername');
             }
 
-            $player->save();
+            $user->save();
 
             return response([
                 'success' => true,

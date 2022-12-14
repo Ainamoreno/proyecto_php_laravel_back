@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Player;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +15,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:players',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
             'steamUsername' => 'required|string|max:255'
         ]);
@@ -27,7 +27,7 @@ class AuthController extends Controller
             ], 400);
         }
 
-        $user = Player::create([
+        $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => bcrypt($request->password),

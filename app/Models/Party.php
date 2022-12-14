@@ -15,8 +15,8 @@ class Party extends Model
         'is_inside',
     ];
 
-    public function players()
+    public function users()
     {
-        return $this->belongsToMany(Player::class);
+        return $this->belongsToMany(User::class);
     }
 }

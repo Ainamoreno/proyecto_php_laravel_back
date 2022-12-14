@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('plays', function (Blueprint $table) {
             $table->id();
             $table->foreignId('game_id')->constrained('games');
-            $table->foreignId('player_id')->constrained('players');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
