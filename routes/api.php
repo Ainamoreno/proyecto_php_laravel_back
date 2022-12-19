@@ -3,7 +3,6 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PartyController;
-use App\Http\Controllers\PlayController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,8 +35,8 @@ Route::group([
     Route::put('/user', [UserController::class, 'updateUser']);
 
     //Play
-    Route::post('/creategameplay/{id}', [PlayController::class, 'createGamePlay']);
-    Route::get('/gameplay/{id}', [PlayController::class, 'getGamePlays']);
+    Route::post('/createparty/{id}', [PartyController::class, 'createParty']);
+    Route::get('/getparties/{id}', [PartyController::class, 'getParties']);
 
     //Party
     Route::post('/getinparty', [PartyController::class, 'getInParty']);

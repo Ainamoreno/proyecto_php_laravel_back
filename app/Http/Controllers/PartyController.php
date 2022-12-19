@@ -17,7 +17,8 @@ class PartyController extends Controller
             $userId = auth()->user()->id;
             
             $party = Party::create([
-                'play_id' => $request->get('play_id'),
+                'game_id' => $request->get('game_id'),
+                'user_id' => $userId,
                 'name' => $request->get('name'),
                 'is_inside' => true
             ]);
@@ -44,7 +45,8 @@ class PartyController extends Controller
             $userId = auth()->user()->id;
             
             $party = Party::create([
-                'play_id' => $request->get('play_id'),
+                'game_id' => $request->get('game_id'),
+                'user_id' => $userId,
                 'name' => $request->get('name'),
                 'is_inside' => false
             ]);
@@ -65,15 +67,19 @@ class PartyController extends Controller
         }
     }
 
-    public function createGamePlay(Request $request, $id)
+    public function createParty(Request $request, $id)
     {
         try {
             $gameId = $id;
             $userId = auth()->user()->id;
+            $name = $request->input('name');
+            $isInside = $request->input('is_inside');
 
             $newGamePlay = new Party();
             $newGamePlay->game_id = $gameId;
             $newGamePlay->user_id = $userId;
+            $newGamePlay->name = $name;
+            $newGamePlay->is_inside = $isInside;
 
             $newGamePlay->save();
 
@@ -90,17 +96,16 @@ class PartyController extends Controller
         }
     }
 
-    public function getGamePlays($id)
+    public function getParties($id)
     {
         try {
             $userId = auth()->user()->id;
             $gameplays = Party::query()
                 ->where('user_id', $userId)
                 ->where('game_id', $id)
-                ->join('games', 'games.id', '=', 'plays.game_id')
-                ->select('games.title AS nombre_videojuego', 'plays.*')
+                ->join('games', 'games.id', '=', 'parties.game_id')
+                ->select('games.title AS nombre_videojuego', 'parties.*')
                 ->get();
-
 
 
             return response([

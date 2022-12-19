@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('party_id')->constrained('parties');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('message');
             $table->date('date');
             $table->timestamps();

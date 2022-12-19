@@ -13,13 +13,14 @@ class MessageController extends Controller
     public function postMessage(Request $request)
     {
         try {
-
+            $userId = auth()->user()->id;
             $party_id = $request->input('party_id');
             $message = $request->input('message');
 
             $newMessage = new Message();
             $newMessage->party_id = $party_id;
             $newMessage->message = $message;
+            $newMessage->user_id = $userId;
             $newMessage->date = now()->toDateTimeString();
             $newMessage->save();
 
@@ -108,6 +109,8 @@ class MessageController extends Controller
         try {
             $messages = Message::query()
             ->where('party_id', $id)
+            ->join('parties', 'parties.id', '=', 'messages.party_id')
+            ->select('parties.name AS Nombre_chat', 'messages.*' )
             ->get();
             return response([
                 'success' => true,
